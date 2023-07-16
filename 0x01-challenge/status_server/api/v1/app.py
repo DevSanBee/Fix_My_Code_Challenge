@@ -3,10 +3,15 @@
 Web server
 """
 from api.v1.views import app_views
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
+
+
+@app.route("/status", methods=["GET"])
+def get_status():
+    return jsonify({"status": "API is up and running"})
 
 
 @app.errorhandler(404)
